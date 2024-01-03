@@ -19,6 +19,10 @@ fun findBasePackages(app: ApplicationContext): Collection<String> {
     }catch (_: IllegalStateException) { }
     app.getBeanNamesForAnnotation(SpringBootApplication::class.java).forEach { beanName ->
         app.getType(beanName)?.packageName?.let { basePackages.add(it) }
+        app.findAllAnnotationsOnBean(beanName, ComponentScan::class.java, false).forEach { componentScan ->
+            basePackages.addAll(componentScan.basePackages)
+            basePackages.addAll(componentScan.basePackageClasses.map { it.java.packageName })
+        }
     }
     app.getBeanNamesForAnnotation(ComponentScan::class.java).forEach { beanName ->
         app.findAnnotationOnBean(beanName, ComponentScan::class.java)?.let { componentScan ->
