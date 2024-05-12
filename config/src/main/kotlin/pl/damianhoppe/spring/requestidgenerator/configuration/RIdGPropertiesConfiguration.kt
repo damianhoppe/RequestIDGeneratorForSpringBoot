@@ -33,8 +33,8 @@ class RIdGPropertiesConfiguration {
      */
     @Bean
     fun requestIdGeneratorProperties(): RIdGProperties {
-        assert(app.getBeanNamesForType(RIdGProperties::class.java).isEmpty()) {
-            "Con not create RIdGProperties, because property object[RIdGProperties.class] exists in ApplicationContext. There should be only one instance of RIdGProperties, if you want to overwrite the default values, use the RIdGConfigurer[${RIdGConfigurer::class.java.name}] or use configuration profiles[${ConfigurationProfile::class.java.name}]".apply {
+        check(app.getBeanNamesForType(RIdGProperties::class.java).size == 1) {
+            "Could not create RIdGProperties bean because other RIdGProperties bean exists in ApplicationContext. There should be only one instance of RIdGProperties, if you want to overwrite the default values, use the RIdGConfigurer[${RIdGConfigurer::class.java.name}] or use configuration profiles[${ConfigurationProfile::class.java.name}]".apply {
                 log.warn(this)
             }
         }
