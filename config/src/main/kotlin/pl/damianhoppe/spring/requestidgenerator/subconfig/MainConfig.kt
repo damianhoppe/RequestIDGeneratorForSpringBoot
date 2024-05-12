@@ -41,7 +41,7 @@ class MainConfig(
     fun requestIdAttributeName(requestIdAttributeName: String) = apply { this.requestIdAttributeName = requestIdAttributeName }
 
     override fun verifyCorrectness() {
-        assert(requestIdHeaderName.isNotBlank()) { "requestIdHeaderName cannot be blank" }
-        assert(requestIdAttributeName.isNotBlank()) { "requestIdAttributeName cannot be blank" }
+        check(requestIdHeaderName.isNotBlank()) { "requestIdHeaderName cannot be blank" }
+        check(requestIdAttributeName.isNotBlank()) { "requestIdAttributeName cannot be blank" }
     }
 }

@@ -11,7 +11,7 @@ interface RIdGSubConfig {
 
     /**
      * Verify correction of config values
-     * @throws AssertionError For invalid values
+     * @throws IllegalStateException For invalid values
      */
     fun verifyCorrectness() {}
 }
